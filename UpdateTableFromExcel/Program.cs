@@ -31,10 +31,16 @@ namespace UpdateTableFromExcel
                         var start = workSheet.Dimension.Start;
                         var end = workSheet.Dimension.End;
 
+                        Console.WriteLine("\n------------DATABASE------------\n");
+
+                        #region Database
+
+                        Console.WriteLine("Opening connection...\n");
+
                         OleDbConnection conn = new OleDbConnection(connString);
                         conn.Open();
 
-                        Console.WriteLine("Connection Opened\n");
+                        Console.WriteLine("Connection Opened.\n");
                         Console.Write("Please insert table name : ");
                         string tableName = Console.ReadLine();
 
@@ -78,9 +84,14 @@ namespace UpdateTableFromExcel
                         dr_Segment.Close();
                         cmd_Segment.Dispose();
 
+                        #endregion
+
                         int excelColFilter = 1, excelColValue = 2;
 
                         Console.WriteLine("\n------------EXCEL------------\n");
+
+                        #region Excel
+
                         Console.WriteLine("Total number of columns = {0}", end.Column);
 
                         Console.Write("\nPlease insert column index to filter (1, 2, n) : ");
@@ -127,12 +138,14 @@ namespace UpdateTableFromExcel
                             Console.Clear();
                         }
 
+                        #endregion
+
                         conn.Dispose();
                         conn.Close();
                     }
                     else
                     {
-                        Console.WriteLine("Invalid selection");
+                        Console.Write("Invalid selection. Press any key to exit...");
                     }
                 }
             }
